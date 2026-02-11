@@ -1,9 +1,14 @@
+"use client";
+
 import Image from 'next/image';
 import Container from '../ui/Container';
 import Button from '../ui/Button';
 import styles from './Hero.module.css';
+import { useNavigation } from '@/hooks/useNavigation';
 
 export default function Hero() {
+  const { handleNavigation } = useNavigation();
+
   return (
     <section className={styles.hero}>
       <div className={styles.overlay}></div>
@@ -26,8 +31,20 @@ export default function Hero() {
           Experience the pinnacle of modern living.
         </p>
         <div className={styles.actions}>
-          <Button href="/properties" variant="primary">View Properties</Button>
-          <Button href="#contact" variant="outlineWhite">Contact Us</Button>
+          <Button 
+            href="#properties" 
+            variant="primary"
+            onClick={(e) => handleNavigation(e, 'properties')}
+          >
+            View Properties
+          </Button>
+          <Button 
+            href="#contact" 
+            variant="outlineWhite"
+            onClick={(e) => handleNavigation(e, 'contact')}
+          >
+            Contact Us
+          </Button>
         </div>
         
         <div className={styles.partnersWrapper}>
