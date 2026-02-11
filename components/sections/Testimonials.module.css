@@ -1,0 +1,97 @@
+.section {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--color-white);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.heading {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background: var(--color-white);
+    /* White instead of gray for cleaner look */
+    padding: 3rem 2.5rem;
+    border-radius: 12px;
+    position: relative;
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.card::before {
+    content: "“";
+    position: absolute;
+    top: 1rem;
+    left: 1.5rem;
+    font-size: 5rem;
+    line-height: 1;
+    color: rgba(212, 175, 55, 0.15);
+    /* Subtle gold quote */
+    font-family: serif;
+}
+
+.stars {
+    color: var(--color-gold);
+    margin-bottom: 1.5rem;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+}
+
+.content {
+    color: var(--color-dark-charcoal);
+    font-style: italic;
+    font-size: 1.15rem;
+    margin-bottom: 2rem;
+    line-height: 1.8;
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-heading);
+    font-weight: 500;
+}
+
+.author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    background-color: var(--color-deep-blue);
+    color: var(--color-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.name {
+    font-weight: 700;
+    color: var(--color-dark-charcoal);
+    font-size: 1rem;
+}
+
+.role {
+    font-size: 0.85rem;
+    color: #888;
+}

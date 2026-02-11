@@ -1,0 +1,106 @@
+.card {
+    background: var(--color-white);
+    border-radius: 12px;
+    /* Softer corners */
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+.imageWrapper {
+    position: relative;
+    height: 280px;
+    /* Taller image */
+    width: 100%;
+    overflow: hidden;
+}
+
+.image {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover .image {
+    transform: scale(1.1);
+    /* Subtle zoom */
+}
+
+.priceTag {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(4px);
+    color: var(--color-deep-blue);
+    padding: 0.5rem 1.25rem;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: var(--font-heading);
+}
+
+.content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.title {
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.title a {
+    color: var(--color-dark-charcoal);
+    transition: color 0.2s;
+}
+
+.title a:hover {
+    color: var(--color-gold);
+}
+
+.location {
+    color: #666;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.features {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-slate-gray);
+    font-size: 0.9rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+}
+
+.link {
+    margin-top: auto;
+    color: var(--color-gold);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+}
+
+.link:hover {
+    color: var(--color-deep-blue);
+}

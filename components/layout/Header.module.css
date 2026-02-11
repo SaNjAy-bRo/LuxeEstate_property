@@ -1,0 +1,99 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 2rem 0;
+    /* More spacious initially */
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent);
+}
+
+.scrolled {
+    background: rgba(255, 255, 255, 0.85) !important;
+    /* Glassy White */
+    backdrop-filter: blur(12px);
+    /* Critical for glass effect */
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    /* Softer, spread out shadow */
+    padding: 1rem 0;
+    /* Compact on scroll */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.navContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    /* Playfair Display */
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-white);
+    letter-spacing: -0.01em;
+    transition: color 0.3s ease;
+    text-transform: capitalize;
+}
+
+.scrolled .logo {
+    color: var(--color-deep-blue) !important;
+}
+
+.accent {
+    color: var(--color-gold);
+    font-style: italic;
+    /* Adds a bit of flair */
+}
+
+.nav {
+    display: flex;
+    gap: 3rem;
+    /* More spacing between links */
+}
+
+/* Creative Link Styling */
+.link {
+    color: var(--color-white);
+    font-weight: 500;
+    font-size: 0.95rem;
+    position: relative;
+    padding-bottom: 0.25rem;
+    transition: color 0.3s ease;
+    letter-spacing: 0.02em;
+}
+
+/* Animated Underline */
+.link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: var(--color-gold);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(-50%);
+}
+
+.link:hover::after {
+    width: 100%;
+}
+
+.link:hover {
+    color: var(--color-white);
+    /* Keep white on hover initially */
+}
+
+.scrolled .link {
+    color: var(--color-deep-blue) !important;
+    font-weight: 600;
+}
+
+.scrolled .link:hover {
+    color: var(--color-deep-blue) !important;
+}
