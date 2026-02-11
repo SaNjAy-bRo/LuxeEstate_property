@@ -7,8 +7,9 @@ import styles from './Header.module.css';
 
 import { usePathname, useRouter } from 'next/navigation';
 
-export default function Header() {
+export default function Header({ siteName }) {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
 
@@ -23,17 +24,14 @@ export default function Header() {
 
   // Handle scroll on initial load (cross-page navigation)
   useEffect(() => {
-    // We use window.location instead of useSearchParams to avoid Suspense requirement in Layout
     const params = new URLSearchParams(window.location.search);
     const scrollToId = params.get('scrollTo');
 
     if (scrollToId && pathname === '/') {
       const element = document.getElementById(scrollToId);
       if (element) {
-        // Small timeout to ensure layout is ready
         setTimeout(() => {
           element.scrollIntoView({ behavior: 'smooth' });
-          // Clean up the URL
           window.history.replaceState({}, '', '/');
         }, 100);
       }
@@ -42,8 +40,8 @@ export default function Header() {
 
   const handleNavigation = (e, targetId) => {
     e.preventDefault();
+    setIsMobileMenuOpen(false); // Close menu on click
     
-    // If we are on the homepage, scroll smoothly
     if (pathname === '/') {
       if (targetId === 'top') {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -54,7 +52,6 @@ export default function Header() {
         }
       }
     } else {
-      // If not on homepage, navigate to home with query param
       if (targetId === 'top') {
         router.push('/');
       } else {
@@ -63,19 +60,50 @@ export default function Header() {
     }
   };
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
       <Container className={styles.navContainer}>
         <a href="#" onClick={(e) => handleNavigation(e, 'top')} className={styles.logo}>
-          Luxe<span className={styles.accent}>Estate</span>
+          {siteName ? (
+            siteName
+          ) : (
+            <>Luxe<span className={styles.accent}>Estate</span></>
+          )}
         </a>
 
+        {/* Desktop Nav */}
         <nav className={styles.nav}>
           <a href="#" onClick={(e) => handleNavigation(e, 'top')} className={styles.link}>Home</a>
           <a href="#properties" onClick={(e) => handleNavigation(e, 'properties')} className={styles.link}>Properties</a>
           <a href="#about" onClick={(e) => handleNavigation(e, 'about')} className={styles.link}>About</a>
           <a href="#contact" onClick={(e) => handleNavigation(e, 'contact')} className={styles.link}>Contact</a>
         </nav>
+
+        {/* Mobile Menu Button */}
+        <button 
+            className={styles.mobileMenuBtn} 
+            onClick={toggleMobileMenu}
+            aria-label="Toggle menu"
+        >
+            <span className={`${styles.bar} ${isMobileMenuOpen ? styles.open : ''}`}></span>
+            <span className={`${styles.bar} ${isMobileMenuOpen ? styles.open : ''}`}></span>
+            <span className={`${styles.bar} ${isMobileMenuOpen ? styles.open : ''}`}></span>
+        </button>
+
+        {/* Mobile Overlay */}
+        <div className={`${styles.mobileMenuOverlay} ${isMobileMenuOpen ? styles.visible : ''}`}>
+            <nav className={styles.mobileNav}>
+                <a href="#" onClick={(e) => handleNavigation(e, 'top')} className={styles.mobileLink}>Home</a>
+                <a href="#properties" onClick={(e) => handleNavigation(e, 'properties')} className={styles.mobileLink}>Properties</a>
+                <a href="#about" onClick={(e) => handleNavigation(e, 'about')} className={styles.mobileLink}>About</a>
+                <a href="#contact" onClick={(e) => handleNavigation(e, 'contact')} className={styles.mobileLink}>Contact</a>
+            </nav>
+        </div>
+
       </Container>
     </header>
   );
